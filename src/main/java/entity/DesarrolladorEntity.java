@@ -2,6 +2,8 @@ package entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "desarrollador", schema = "bibliotecajuegos", catalog = "")
 public class DesarrolladorEntity {
@@ -16,8 +18,17 @@ public class DesarrolladorEntity {
     @Column(name = "num_juegos")
     private Integer numJuegos;
     @Basic
-    @Column(name = "beneficios")
-    private Integer beneficios;
+    @Column(name = "creation_date")
+    private Timestamp creationDate;
+
+    public DesarrolladorEntity(String nombre, Integer numJuegos) {
+        this.nombre = nombre;
+        this.numJuegos = numJuegos;
+    }
+
+    public DesarrolladorEntity() {
+
+    }
 
     public int getIdDesarrollador() {
         return idDesarrollador;
@@ -43,12 +54,12 @@ public class DesarrolladorEntity {
         this.numJuegos = numJuegos;
     }
 
-    public Integer getBeneficios() {
-        return beneficios;
+    public Timestamp getCreationDate() {
+        return creationDate;
     }
 
-    public void setBeneficios(Integer beneficios) {
-        this.beneficios = beneficios;
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override
@@ -61,7 +72,7 @@ public class DesarrolladorEntity {
         if (idDesarrollador != that.idDesarrollador) return false;
         if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
         if (numJuegos != null ? !numJuegos.equals(that.numJuegos) : that.numJuegos != null) return false;
-        if (beneficios != null ? !beneficios.equals(that.beneficios) : that.beneficios != null) return false;
+        if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
 
         return true;
     }
@@ -71,7 +82,7 @@ public class DesarrolladorEntity {
         int result = idDesarrollador;
         result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
         result = 31 * result + (numJuegos != null ? numJuegos.hashCode() : 0);
-        result = 31 * result + (beneficios != null ? beneficios.hashCode() : 0);
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         return result;
     }
 }
