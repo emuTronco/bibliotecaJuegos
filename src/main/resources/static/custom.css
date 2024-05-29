@@ -1,0 +1,16 @@
+body {
+  background: url(hero-bg.png) top center no-repeat;
+  background-size: cover;
+}
+
+.card {
+  background-color: #FFF0F6;
+}
+
+.auditoria-bg {
+  background: url(hero-bg-aud.png) top center no-repeat;
+  background-size: cover;
+}
+
+
+
