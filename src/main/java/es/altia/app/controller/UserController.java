@@ -74,17 +74,17 @@ public class UserController {
 
 		Auditoria.userTypeInfo rolUsuario;
 		switch (nombreUsuario) {
-		case "admin@admin":
-			rolUsuario = userTypeInfo.ADMIN;
-			break;
-		case "update@update":
-			rolUsuario = userTypeInfo.UPDATE_USER;
-			break;
-		case "delete@delete":
-			rolUsuario = userTypeInfo.DELETE_USER;
-			break;
-		default:
-			rolUsuario = userTypeInfo.USER;
+			case "admin@admin":
+				rolUsuario = userTypeInfo.ADMIN;
+				break;
+			case "update@update":
+				rolUsuario = userTypeInfo.UPDATE_USER;
+				break;
+			case "delete@delete":
+				rolUsuario = userTypeInfo.DELETE_USER;
+				break;
+			default:
+				rolUsuario = userTypeInfo.USER;
 		}
 		model.put("rolUsuario", rolUsuario);
 		model.put("name", nombreUsuario);
@@ -101,7 +101,7 @@ public class UserController {
 
 	@RequestMapping(value = "/create-user", method = RequestMethod.GET)
 	public String createUser(ModelMap model) {
-		model.put("titulo", getMessageSource("tituloCrear.message"))y;
+		model.put("titulo", getMessageSource("tituloCrear.message"));
 		model.put("formulario", "/create-user");
 
 		return "create&updateUser";
@@ -114,8 +114,9 @@ public class UserController {
 		} else {
 			System.out.println("Usuario vacío");
 		}
-//		User userBBDD = userService.findByEmail(user.getEmail());
-//		if (null != userBBDD && null != userBBDD.getEmail() && !userBBDD.getEmail().isEmpty()) {
+		// User userBBDD = userService.findByEmail(user.getEmail());
+		// if (null != userBBDD && null != userBBDD.getEmail() &&
+		// !userBBDD.getEmail().isEmpty()) {
 		if (existeEmail(user.getEmail())) {
 			model.put("mensajeError", getMessageSource("errorEmail.message"));
 			model.put("titulo", getMessageSource("tituloCrear.message"));
@@ -127,7 +128,7 @@ public class UserController {
 					"Creacion del nuevo usuario " + user.getName() + " " + user.getSurname());
 			auditoriaService.save(crearUsuario);
 			// Agrega los datos al objeto RedirectAttributes
-			redirectAttributes.addFlashAttribute("mensajeExito", getMessageSource("custom.exitoBorrado"));
+			redirectAttributes.addFlashAttribute("mensajeExito", getMessageSource("exitoCreado.message"));
 			return "redirect:/list-users";
 
 		}
@@ -226,22 +227,22 @@ public class UserController {
 		return (null != userBBDD && null != userBBDD.getEmail() && !userBBDD.getEmail().isEmpty());
 	}
 
-//	@Bean
-//	public MessageSource messageSource() {
-//	    ReloadableResourceBundleMessageSource messageSource
-//	      = new ReloadableResourceBundleMessageSource();
-//	    
-//	    messageSource.setBasename("classpath:messages");
-//	    messageSource.setDefaultEncoding("UTF-8");
-//	    return messageSource;
-//	}
-//	
-//	@Bean
-//	public LocalValidatorFactoryBean getValidator() {
-//	    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-//	    bean.setValidationMessageSource(messageSource());
-//	    return bean;
-//	}
+	// @Bean
+	// public MessageSource messageSource() {
+	// ReloadableResourceBundleMessageSource messageSource
+	// = new ReloadableResourceBundleMessageSource();
+	//
+	// messageSource.setBasename("classpath:messages");
+	// messageSource.setDefaultEncoding("UTF-8");
+	// return messageSource;
+	// }
+	//
+	// @Bean
+	// public LocalValidatorFactoryBean getValidator() {
+	// LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+	// bean.setValidationMessageSource(messageSource());
+	// return bean;
+	// }
 
 	private String getMessageSource(String mensaje) {
 		return messageSource.getMessage(mensaje, null, LocaleContextHolder.getLocale());
